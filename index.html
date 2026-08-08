@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Normandy D-Day Ops</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <h1>Normandy D-Day Ops</h1>
+          <p>Original operational prototype</p>
+        </div>
+        <div class="turn-strip" aria-live="polite">
+          <span id="scenarioName">-</span>
+          <strong id="turnLabel">Turn 1</strong>
+          <span id="phaseLabel">Event</span>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="map-stage" aria-label="作戦盤">
+          <div class="map-toolbar">
+            <div class="toolbar-field campaign-field">
+              <span>Campaign</span>
+              <div id="datasetTabs" class="campaign-tabs" role="tablist" aria-label="Campaign"></div>
+            </div>
+            <label>
+              <span>Scenario <small id="scenarioCount">0 scenarios</small></span>
+              <select id="scenarioSelect"></select>
+            </label>
+            <button id="loadScenarioBtn" type="button" title="Load scenario">Load</button>
+            <button id="nextPhaseBtn" type="button" title="Next phase">Next</button>
+            <button id="drawEventBtn" type="button" title="Draw event">Event</button>
+            <button id="germanAiBtn" type="button" title="German AI">German AI</button>
+            <button id="resetBtn" type="button" title="Reset scenario">Reset</button>
+          </div>
+          <div class="board-frame">
+            <svg id="boardSvg" role="img" aria-label="ノルマンディー作戦盤"></svg>
+          </div>
+          <div
+            id="combatRollOverlay"
+            class="combat-roll"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            hidden
+          >
+            <div class="combat-roll-card">
+              <div id="combatRollMeta" class="combat-roll-meta">Combat roll</div>
+              <div class="combat-roll-body">
+                <div id="combatDieFace" class="die-face" data-value="1" aria-hidden="true">
+                  <span class="pip pip-tl"></span>
+                  <span class="pip pip-tr"></span>
+                  <span class="pip pip-ml"></span>
+                  <span class="pip pip-c"></span>
+                  <span class="pip pip-mr"></span>
+                  <span class="pip pip-bl"></span>
+                  <span class="pip pip-br"></span>
+                </div>
+                <div class="combat-roll-readout">
+                  <div id="combatRollValue" class="combat-roll-value">d6</div>
+                  <div id="combatRollMath" class="combat-roll-math">A0 vs D0</div>
+                  <div id="combatRollOutcome" class="combat-roll-outcome">Ready</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="side-panel">
+          <section class="panel">
+            <div class="panel-head">
+              <h2>Selected</h2>
+              <span id="selectedBadge">None</span>
+            </div>
+            <div id="selectedPanel" class="selected-panel"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <h2>Objectives</h2>
+              <span id="scoreBadge">0 / 0</span>
+            </div>
+            <div id="objectivesPanel" class="objectives"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <h2>Event</h2>
+              <span id="eventBadge">Ready</span>
+            </div>
+            <div id="eventPanel" class="event-panel"></div>
+          </section>
+
+          <section class="panel unit-panel">
+            <div class="panel-head">
+              <h2>Units</h2>
+              <span id="unitBadge">0</span>
+            </div>
+            <div id="unitsPanel" class="units-list"></div>
+          </section>
+
+          <section class="panel log-panel">
+            <div class="panel-head">
+              <h2>Log</h2>
+              <span id="statusBadge">Live</span>
+            </div>
+            <ol id="logPanel" class="log-list"></ol>
+          </section>
+        </aside>
+      </main>
+
+      <footer class="footer-note">
+        Fan-made original design for private prototyping. Not an Avalon Hill product.
+      </footer>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="data-westfront.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
